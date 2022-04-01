@@ -21,7 +21,7 @@ func selection_ended(units_selected):
 
 func reset_selection():
 	for unit in unit_movable:
-		unit.get_node("Sprite").material.set_shader_param("visible",false)
+		unit.get_node("Sprite").material.set_shader_param("visible", false)
 	unit_movable = []
 
 func _circle_formation(unit_array, mousepos):
@@ -32,7 +32,7 @@ func _circle_formation(unit_array, mousepos):
 	var unit_count_in_circle = 0
 	var current_angle = 0
 	for unit in unit_array:
-		unit.move_to_position(unit_pos)
+		unit.set_target_position(unit_pos)
 		unit_count_in_circle += 1
 		if unit_count_in_circle >= unit_total_count_in_circle:
 			unit_count_in_circle = 0

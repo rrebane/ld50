@@ -3,7 +3,7 @@ extends Control
 var unit_selected = []
 var is_selecting = false
 
-onready var units = get_tree().get_nodes_in_group("units")[0]
+onready var units = get_tree().get_nodes_in_group("selectable")[0]
 
 func _ready():
 	draw_selection(PoolVector2Array([Vector2(0,0),Vector2(0,0),Vector2(0,0),Vector2(0,0)]))
@@ -46,7 +46,7 @@ func end_selection():
 	unit_selected = []
 
 func selection(area, selected):
-	if area.is_in_group("unit_area"):
+	if area.is_in_group("selectable_area"):
 		var unit = area.get_parent()
 		units.select_unit(unit, selected)
 		if selected:

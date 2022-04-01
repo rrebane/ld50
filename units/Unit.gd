@@ -1,32 +1,35 @@
 extends Node2D
 
+class_name Unit
+
+export var unit_speed: float = 200
+
 onready var navigation = get_tree().get_nodes_in_group("navigation")[0]
-onready var line = load("res://ui/Line.tscn").instance()
 
 var _path: PoolVector2Array
+var _current_target: Vector2
 
-func move_to_position(target_position):
-	set_process(true)
+func set_target_position(target_position):
+	if _current_target && _current_target.distance_to(target_position) <= 64:
+		return
+
 	_path = _path_to_target(target_position)
 	_path.insert(0, position)
-	line.points = _path
+	_current_target = target_position
 
-func _ready():
-	get_parent().call_deferred("add_child", line)
-	set_process(false)
-
-func _process(delta: float):
+func move_towards_target_position(delta: float):
 	if _path.size() > 1:
 		var d: float = position.distance_to(_path[1])
 		if d > 5:
-			position = position.linear_interpolate(_path[1], (200 * delta)/d)
+			position = position.linear_interpolate(_path[1], (unit_speed * delta)/d)
 			look_at(_path[1])
 		else:
 			_path.remove(1)
 		_path[0] = position
-		line.points = _path
+
+		return true
 	else:
-		set_process(false)
+		return false
 
 func _path_to_target(target_position):
 	var path = navigation.get_simple_path(position, target_position, false)
