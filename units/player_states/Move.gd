@@ -3,6 +3,7 @@ extends State
 var velocity := Vector2.ZERO
 
 func run(_delta):
+	obj.anim.play("run")
 	var dir = Vector2.ZERO
 	if Input.is_action_pressed("right"):
 		dir += Vector2.RIGHT
@@ -26,4 +27,6 @@ func run(_delta):
 		obj.direction = 1
 		obj.rotation_parent.scale.x = obj.direction
 	var velocity = dir * obj.SPEED
+	if abs(velocity.x) < 0.1:
+		obj.anim.play("reset")
 	obj.velocity = obj.move_and_slide(velocity)

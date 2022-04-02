@@ -14,6 +14,7 @@ onready var fsm = FSM.new(self, $States, STATES["Move"], true)
 onready var item_holder : Position2D = $RotationParent/ItemPosition
 onready var interact_range : Area2D = $RotationParent/InteractRange
 onready var rotation_parent = $RotationParent
+onready var anim = $AnimationPlayer
 
 func _physics_process(delta):
 	fsm.run_machine(delta)
