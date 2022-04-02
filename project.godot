@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://plugins/behavior_tree/nodes/decorators/decorator.gd"
 }, {
+"base": "Node",
+"class": "FSM",
+"language": "GDScript",
+"path": "res://fsm/FSM.gd"
+}, {
 "base": "Decorator",
 "class": "InverterDecorator",
 "language": "GDScript",
@@ -79,26 +84,33 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://plugins/behavior_tree/nodes/composites/sequence.gd"
 }, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://fsm/State.gd"
+}, {
 "base": "Node2D",
 "class": "Unit",
 "language": "GDScript",
 "path": "res://units/Unit.gd"
 } ]
 _global_script_class_icons={
-"ActionLeaf": "",
-"AlwaysFailDecorator": "",
-"AlwaysSucceedDecorator": "",
+"ActionLeaf": "res://plugins/behavior_tree/icons/action.svg",
+"AlwaysFailDecorator": "res://plugins/behavior_tree/icons/fail.svg",
+"AlwaysSucceedDecorator": "res://plugins/behavior_tree/icons/succeed.svg",
 "BehaviorTree": "",
-"BehaviorTreeNode": "",
+"BehaviorTreeNode": "res://plugins/behavior_tree/icons/action.svg",
 "BehaviorTreeRoot": "res://plugins/behavior_tree/icons/tree.svg",
-"Composite": "",
-"ConditionLeaf": "",
-"Decorator": "",
-"InverterDecorator": "",
-"Leaf": "",
-"LimiterDecorator": "",
-"SelectorComposite": "",
-"SequenceComposite": "",
+"Composite": "res://plugins/behavior_tree/icons/category_composite.svg",
+"ConditionLeaf": "res://plugins/behavior_tree/icons/condition.svg",
+"Decorator": "res://plugins/behavior_tree/icons/category_decorator.svg",
+"FSM": "",
+"InverterDecorator": "res://plugins/behavior_tree/icons/inverter.svg",
+"Leaf": "res://plugins/behavior_tree/icons/action.svg",
+"LimiterDecorator": "res://plugins/behavior_tree/icons/limiter.svg",
+"SelectorComposite": "res://plugins/behavior_tree/icons/selector.svg",
+"SequenceComposite": "res://plugins/behavior_tree/icons/sequencer.svg",
+"State": "",
 "Unit": ""
 }
 
@@ -107,6 +119,15 @@ _global_script_class_icons={
 config/name="Ludum Dare 50"
 run/main_scene="res://world/World.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=256
+window/size/height=144
+window/size/test_width=1024
+window/size/test_height=576
+window/stretch/mode="2d"
+window/stretch/aspect="keep_width"
 
 [input]
 
@@ -120,6 +141,26 @@ activate={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [physics]
 
@@ -130,5 +171,5 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.843137, 0.843137, 0.843137, 1 )
+environment/default_clear_color=Color( 0, 0, 0.0705882, 1 )
 environment/default_environment="res://default_env.tres"
