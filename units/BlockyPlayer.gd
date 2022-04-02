@@ -3,31 +3,35 @@ extends KinematicBody2D
 export (float) var SPEED = 200.0
 
 var velocity := Vector2.ZERO
+var direction = 1
 
-var pickup_target : Food = null
 var held_item : Food = null
 
 onready var STATES = {
 	"Move": $States/Move,
 }
 onready var fsm = FSM.new(self, $States, STATES["Move"], true)
-onready var item_holder = $RotationParent/ItemPosition
+onready var item_holder : Position2D = $RotationParent/ItemPosition
+onready var interact_range : Area2D = $RotationParent/InteractRange
+onready var rotation_parent = $RotationParent
 
 func _physics_process(delta):
 	fsm.run_machine(delta)
 	# Pick and throw logic
 	if Input.is_action_just_pressed("pick_up"):
-		if pickup_target:
-			if not held_item:
-				held_item = pickup_target
-			else:
-				held_item.throw(global_position)
-				held_item = null
-				pickup_target = null
-
-	if held_item:
-		held_item.global_position = item_holder.global_position
-
+		if not held_item:
+			var targets = interact_range.get_overlapping_bodies()
+			if targets.size() > 0:
+				held_item = targets[0]
+				held_item.get_parent().remove_child(held_item)
+				item_holder.add_child(held_item)
+				held_item.global_position = item_holder.global_position
+		else:
+			item_holder.remove_child(held_item)
+			get_parent().add_child(held_item)
+			held_item.global_position = item_holder.global_position
+			held_item.throw(global_position, direction)
+			held_item = null
 
 
 # Mouse movement

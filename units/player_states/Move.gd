@@ -19,6 +19,11 @@ func run(_delta):
 	if dir.x and dir.y:
 		dir = dir * 0.5
 
-
+	if dir.x < 0:
+		obj.direction = -1
+		obj.rotation_parent.scale.x = obj.direction
+	elif dir.x > 0:
+		obj.direction = 1
+		obj.rotation_parent.scale.x = obj.direction
 	var velocity = dir * obj.SPEED
 	obj.velocity = obj.move_and_slide(velocity)

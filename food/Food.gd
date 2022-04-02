@@ -1,34 +1,18 @@
-extends Node2D
+extends KinematicBody2D
 class_name Food
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var is_throwing := false
-var throw_target := Vector2.ZERO
-var throw_distance := 100
+var THROW_SPEED := Vector2(100, 0)
+var DRAG := Vector2(2, 0)
+var velocity := Vector2.ZERO
 
 func _physics_process(delta):
-	if is_throwing:
-		if global_position < throw_target:
-			global_position = lerp(global_position, throw_target, 0.2)
-		else:
-			is_throwing = false
-	pass
+	if abs(velocity.x) < 5:
+		velocity = Vector2.ZERO
+	else:
+		var drag_direction = -1 if velocity.x > 0 else 1
+		velocity += DRAG * drag_direction
+	velocity = move_and_slide(velocity)
 
-func _ready():
-	$Area2D.connect("body_entered", self, "on_body_enter")
-	$Area2D.connect("body_exited", self, "on_body_exit")
-
-func on_body_enter(body):
-	if body.is_in_group("player"):
-		body.pickup_target = self
-
-func on_body_exit(body):
-	if body.is_in_group("player"):
-		body.pickup_target = null
-
-func throw(player_position):
-	throw_target = player_position + Vector2(throw_distance, 0)
-	is_throwing = true
+func throw(player_position, dir):
+	velocity = THROW_SPEED * dir
 	pass

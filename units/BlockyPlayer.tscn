@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://sprites/blocky_player.png" type="Texture" id=1]
 [ext_resource path="res://units/BlockyPlayer.gd" type="Script" id=2]
 [ext_resource path="res://units/player_states/Move.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.5, 6 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -12,6 +15,15 @@ height = 0.0
 script = ExtResource( 2 )
 
 [node name="RotationParent" type="Node2D" parent="."]
+
+[node name="InteractRange" type="Area2D" parent="RotationParent"]
+position = Vector2( 9, -5 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationParent/InteractRange"]
+position = Vector2( -5.5, 5 )
+shape = SubResource( 2 )
 
 [node name="ItemPosition" type="Position2D" parent="RotationParent"]
 position = Vector2( 2, -6 )
