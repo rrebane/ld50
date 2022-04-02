@@ -117,7 +117,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ludum Dare 50"
-run/main_scene="res://world/World.tscn"
+run/main_scene="res://world/levels/level_1.tscn"
 config/icon="res://icon.png"
 
 [display]
