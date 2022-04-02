@@ -19,5 +19,6 @@ func run(_delta):
 	if dir.x and dir.y:
 		dir = dir * 0.5
 
+
 	var velocity = dir * obj.SPEED
 	obj.velocity = obj.move_and_slide(velocity)

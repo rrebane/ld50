@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://fsm/FSM.gd"
 }, {
+"base": "Node2D",
+"class": "Food",
+"language": "GDScript",
+"path": "res://food/Food.gd"
+}, {
 "base": "Decorator",
 "class": "InverterDecorator",
 "language": "GDScript",
@@ -105,6 +110,7 @@ _global_script_class_icons={
 "ConditionLeaf": "res://plugins/behavior_tree/icons/condition.svg",
 "Decorator": "res://plugins/behavior_tree/icons/category_decorator.svg",
 "FSM": "",
+"Food": "",
 "InverterDecorator": "res://plugins/behavior_tree/icons/inverter.svg",
 "Leaf": "res://plugins/behavior_tree/icons/action.svg",
 "LimiterDecorator": "res://plugins/behavior_tree/icons/limiter.svg",
@@ -159,6 +165,11 @@ up={
 down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+pick_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 

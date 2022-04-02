@@ -4,13 +4,30 @@ export (float) var SPEED = 200.0
 
 var velocity := Vector2.ZERO
 
+var pickup_target : Food = null
+var held_item : Food = null
+
 onready var STATES = {
 	"Move": $States/Move,
 }
 onready var fsm = FSM.new(self, $States, STATES["Move"], true)
+onready var item_holder = $RotationParent/ItemPosition
 
 func _physics_process(delta):
 	fsm.run_machine(delta)
+	# Pick and throw logic
+	if Input.is_action_just_pressed("pick_up"):
+		if pickup_target:
+			if not held_item:
+				held_item = pickup_target
+			else:
+				held_item.throw(global_position)
+				held_item = null
+				pickup_target = null
+
+	if held_item:
+		held_item.global_position = item_holder.global_position
+
 
 
 # Mouse movement
