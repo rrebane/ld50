@@ -443,7 +443,8 @@ tracks/3/keys = {
 "values": [ Vector2( -15, 1.103 ) ]
 }
 
-[node name="Monster" type="KinematicBody2D"]
+[node name="Monster" type="KinematicBody2D" groups=["monster"]]
+collision_layer = 8
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

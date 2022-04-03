@@ -29,19 +29,11 @@ func _physics_process(delta):
 	fsm.run_machine(delta)
 
 func body_entered_fooddetector(body):
+	if body.is_in_group("player"):
+		STATES["Eat"].has_eaten_player = true
 
-	if body.is_in_group("food"):
-		if body.is_in_group("player"):
-			STATES["Eat"].has_eaten_player = true
-		eat()
+	if body.is_in_group("food") or body.is_in_group("player"):
+		fsm.state_next = STATES["Eat"]
+		body.queue_free()
 		body.get_eaten($Rotation/MonsterBody/MonsterMouth.global_position)
 
-func eat():
-	var targets = food_detector.get_overlapping_bodies()
-	if targets.size() > 0:
-		fsm.state_next = STATES["Eat"]
-		if targets.size() > 1:
-			targets.remove(0)
-			for t in targets:
-				if t != self:
-					t.queue_free()
