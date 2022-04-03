@@ -126,6 +126,10 @@ config/name="Ludum Dare 50"
 run/main_scene="res://world/levels/level_1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Steering="*res://steering/Steering.gd"
+
 [display]
 
 window/size/width=256
