@@ -9,6 +9,7 @@ var held_item : Food = null
 
 onready var STATES = {
 	"Move": $States/Move,
+	"Eaten": $States/Eaten,
 }
 onready var fsm = FSM.new(self, $States, STATES["Move"], true)
 onready var item_holder : Position2D = $RotationParent/ItemPosition
@@ -34,6 +35,9 @@ func _physics_process(delta):
 			held_item.throw(global_position, direction)
 			held_item = null
 
+func get_eaten(mouth_global_position):
+	STATES["Eaten"].tween_target = mouth_global_position
+	fsm.state_next = STATES["Eaten"]
 
 # Mouse movement
 # Works in a scene without a camera,
