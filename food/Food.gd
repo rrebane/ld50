@@ -20,17 +20,3 @@ func throw(player_position, dir):
 	velocity = THROW_SPEED * dir
 	pass
 
-func get_eaten(mouth_global_position):
-	is_being_eaten = true
-	var tween = Tween.new()
-	add_child(tween)
-	tween.interpolate_property(
-		self, "global_position",
-		global_position, mouth_global_position, 0.2,
-		Tween.TRANS_QUAD, Tween.EASE_IN)
-	tween.interpolate_property(
-		self, "scale",
-		null, Vector2(0.5, 0.5), 0.2,
-		Tween.TRANS_QUAD, Tween.EASE_IN)
-	tween.start()
-	tween.connect("tween_all_completed", self, "queue_free")

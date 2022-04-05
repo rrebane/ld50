@@ -35,10 +35,6 @@ func _physics_process(delta):
 			held_item.throw(global_position, direction)
 			held_item = null
 
-func get_eaten(mouth_global_position):
-	STATES["Eaten"].tween_target = mouth_global_position
-	fsm.state_next = STATES["Eaten"]
-
 # Mouse movement
 # Works in a scene without a camera,
 # With a camera there is some strange offset
