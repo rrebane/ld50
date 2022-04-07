@@ -8,8 +8,7 @@ var direction = 1
 var held_item : Food = null
 
 onready var STATES = {
-	"Move": $States/Move,
-	"Eaten": $States/Eaten,
+	"Move": $States/Move
 }
 onready var fsm = FSM.new(self, $States, STATES["Move"], true)
 onready var item_holder : Position2D = $RotationParent/ItemPosition
